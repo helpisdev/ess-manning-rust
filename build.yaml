@@ -1,0 +1,130 @@
+targets:
+  $default:
+    builders:
+      dart_json_mapper:
+        options:
+          iterables: List, Set, HashSet, UnmodifiableListView, Map, HashMap
+        generate_for:
+        # here should be listed entry point files having 'void main()' function
+          - lib/main.dart
+      # This part is needed to tell original reflectable builder to stay away
+      # it overrides default options for reflectable builder to an **empty** set of files
+      reflectable:
+        generate_for:
+          - no/files
+      build_web_compilers:entrypoint:
+        dev_options:
+          dart2js_args:
+            - --no-minify
+            - --show-package-warnings
+            - -O0
+            - --enable-diagnostic-colors
+            - --verbose
+            - --fatal-warnings
+        release_options:
+          dart2js_args:
+            - -O2
+            - --minify
+            - --fast-startup
+            - --csp
+      go_router_builder:
+        generate_for:
+          - lib/src/router/**.dart
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+            - always_specify_types
+            - public_member_api_docs
+      # flutter_data|data_repository_builder:
+      #   generate_for:
+      #     - ./*
+      #     - lib/**.dart
+      #     - packages/features/**/lib/**.dart
+      # flutter_data|data_library_intermediate_builder:
+      #   generate_for:
+      #     - ./*
+      #     - lib/**.dart
+      #     - packages/features/**/lib/**.dart
+      # flutter_data|data_library_builder:
+      #   generate_for:
+      #     - ./*
+      #     - lib/**.dart
+      #     - packages/features/**/lib/**.dart
+      bdd_widget_test|featureBuilder:
+        generate_for:
+          - test/*.feature
+          - packages/features/**/test/features/*.feature
+        options:
+          externalSteps:
+            - package:bdd_widget_test/step/i_see_text.dart
+            - package:bdd_widget_test/step/i_dont_see_text.dart
+            - package:bdd_widget_test/step/i_see_multiple_texts.dart
+            - package:bdd_widget_test/step/i_tap_text.dart
+            - package:bdd_widget_test/step/i_see_icon.dart
+            - package:bdd_widget_test/step/i_dont_see_icon.dart
+            - package:bdd_widget_test/step/i_tap_icon.dart
+            - package:bdd_widget_test/step/i_see_rich_text.dart
+            - package:bdd_widget_test/step/i_dont_see_rich_text.dart
+            - package:bdd_widget_test/step/i_see_widget.dart
+            - package:bdd_widget_test/step/i_dont_see_widget.dart
+            - package:bdd_widget_test/step/i_see_exactly_widgets.dart
+            - package:bdd_widget_test/step/i_see_multiple_widgets.dart
+            - package:bdd_widget_test/step/i_enter_into_input_field.dart
+            - package:bdd_widget_test/step/i_see_disabled_elevated_button.dart
+            - package:bdd_widget_test/step/i_see_enabled_elevated_button.dart
+            - package:bdd_widget_test/step/i_wait.dart
+            - package:bdd_widget_test/step/i_dismiss_the_page.dart
+      # freezed:
+      #   generate_for:
+      #     - lib/**.dart
+      #     - packages/features/**/lib/**.dart
+      # json_serializable:
+      #   options:
+      #     any_map: true
+      #     checked: true
+      #     constructor: ""
+      #     create_factory: true
+      #     create_field_map: true
+      #     create_to_json: true
+      #     disallow_unrecognized_keys: false
+      #     explicit_to_json: true
+      #     field_rename: none
+      #     generic_argument_factories: true
+      #     ignore_unannotated: false
+      #     include_if_null: true
+      #   generate_for:
+      #     - lib/**.dart
+      #     - packages/features/**/lib/**.dart
+      riverpod_generator:
+        generate_for:
+          - lib/**.dart
+          - packages/features/**/lib/**.dart
+      flutter_gen_runner:
+        enabled: true
+        generate_for:
+          - assets/**
+    sources:
+      - ./*
+      - $lib$
+      - $lib$/**
+      - lib/**
+      - $package$
+      - $package$/**
+      - $packages$
+      - $packages$/**
+      - packages/**
+      - packages/features/**/lib/**
+      - packages/features/**/test/**
+      - pubspec.yaml
+      - assets/
+      - assets/**
+      - web/**
+      - pubspec.*
+    dependencies:
+      # - freezed
+      - dart_json_mapper
+      # - json_serializable
+      - flutter_riverpod
+      - bdd_widget_test
+      - go_router
+      # - flutter_data
