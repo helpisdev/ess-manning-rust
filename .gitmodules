@@ -1,0 +1,3 @@
+[submodule "packages/features/stylesystem"]
+	path = packages/features/stylesystem
+	url = https://github.com/helpis-software/stylesystem.git

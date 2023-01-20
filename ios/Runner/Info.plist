@@ -29,7 +29,7 @@
     <key>UIMainStoryboardFile</key>
     <string>Main</string>
     <key>CADisableMinimumFrameDurationOnPhone</key>
-	  <true/>
+    <true/>
     <key>UISupportedInterfaceOrientations</key>
     <array>
       <string>UIInterfaceOrientationPortrait</string>
@@ -49,7 +49,6 @@
     <array>
       <string>en</string>
       <string>el</string>
-
     </array>
     <key>LSApplicationQueriesSchemes</key>
     <array>
@@ -63,4 +62,3 @@
     <true/>
   </dict>
 </plist>
-

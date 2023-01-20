@@ -11,7 +11,7 @@ Future<void> testExecutable(final FutureOr<void> Function() testMain) async {
     config: const AlchemistConfig(
       // theme: CustomTheme.light(),
       platformGoldensConfig: PlatformGoldensConfig(
-        enabled: !isRunningInCi,
+        
       ),
     ),
     run: testMain,
